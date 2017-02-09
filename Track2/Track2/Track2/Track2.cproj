@@ -216,13 +216,13 @@
     <Compile Include="src\Headers\wait.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\main.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\Source\AssignmentB2.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Source\AssignmentB3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Source\wait.c">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\asf.h">

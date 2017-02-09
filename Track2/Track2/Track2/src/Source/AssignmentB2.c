@@ -4,13 +4,20 @@
  * Created: 9-2-2017 10:57:09
  *  Author: Camiel
  */ 
-#define F_CPU 8000000
-#include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
+#include "asf.h"
+#include "../Headers/AssignmentB2.h"
 
-
-
+// Uncommenting the ISR function will give build errors... pls help
+//interrupt function
+/*ISR( INT0_vect )
+{
+	if(PORTC==0x00 || PORTC==0x80)
+	{
+		PORTC=0x01;
+		} else{
+		PORTC = PORTC<<1;
+	}
+}*/
 
 void run()
 {
@@ -25,10 +32,7 @@ void run()
 	sei();
 	while(1)
 	{
-		//wait(1000);
-		//PORTD = 0x01;
-		//wait(1000);
-		//PORTD = 0x00;
+		
 	}
 }
 
