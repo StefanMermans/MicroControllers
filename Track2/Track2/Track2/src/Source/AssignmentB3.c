@@ -13,30 +13,10 @@
 		3
 */
 
-ISR( INT0_vect )
-{
-	display(++data.number);
-}
-
-ISR( INT1_vect )
-{
-	display(--data.number);
-}
 
 
 void display(int number){
-	DDRC=0xFF;
-	
-	if(number < 0 || number > 15){
-		number = 16;
-	}
-	
-	PORTC = data.hexTable[number];
-}
-
-void runB3 ()
-{
-	data.hexTable = {
+	int hexTable[20]={
 		0x3F, // 0
 		0x6,  // 1
 		0x5B, // 2
@@ -56,19 +36,34 @@ void runB3 ()
 		0x71, // F
 		0x7b  // e (error)
 	};
-	
-	DDRD = 0x03;
+	if(number < 0 || number > 15){
+		number = 16;
+	}
+	PORTC = hexTable[number];	
+}
+
+void runB3 ()
+{	
+	DDRD = 0x00;
 	DDRC = 0xFF;
-	PORTC = 0x00;
-	PORTD = 0x00;
-	
-	EICRA |= 0x0F;
-	EIMSK |= 0x00;
-	
-	display(data.number);
-	
+	PORTC = 0x00;	
+	PORTD = 0x01;
+	int number =0;	
 	while(1)
-	{
-		wait(10);	
+	{		
+		for(int i =0; i<17; i++)
+		{
+			display(i);
+			wait(500);
+		}
+		for(int x=0;x<3;x++)
+		{
+			for(int i=0;i<7;i++)
+			{
+				PORTC = 0x01<<i;
+				wait(300);
+			}
+		}
+		
 	}
 }
