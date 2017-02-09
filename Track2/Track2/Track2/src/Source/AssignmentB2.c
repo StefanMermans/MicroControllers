@@ -22,7 +22,7 @@ void run()
 {
 	DDRD = 0x01;
 	DDRC = 0xFF;
-	PORTC = 0x00;
+	PORTC = 0x01;
 	PORTD = 0x00;
 	
 	EICRA |= 0x0F;			// INT1 falling edge, INT0 rising edge

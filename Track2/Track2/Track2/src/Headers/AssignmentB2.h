@@ -14,7 +14,7 @@ void run();
 //interrupt function
 ISR( INT0_vect )
 {
-	if(PORTC==0x00)
+	if(PORTC==0x00 || PORTC==0x80)
 	{
 		PORTC=0x01;
 	} else{
