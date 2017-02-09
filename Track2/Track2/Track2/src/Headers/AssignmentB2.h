@@ -8,6 +8,7 @@
 
 #ifndef ASSIGNMENTB2_H_
 #define ASSIGNMENTB2_H_
+#include "../Headers/wait.h"
 
 void run();
 

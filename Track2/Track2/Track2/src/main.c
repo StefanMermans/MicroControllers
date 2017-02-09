@@ -19,10 +19,15 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "Headers/AssignmentB2.h"
+#include "Headers/assignmentb3.h"
 
 int main(void)
 {
-	run();
+	//assignmentb2
+	//run();
+	
+	//assignmentb3
+	runB3();
 }
 
 ///******************************************************************/

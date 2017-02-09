@@ -210,10 +210,19 @@
     <Compile Include="src\Headers\AssignmentB2.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\Headers\assignmentb3.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Headers\wait.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\main.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Source\AssignmentB2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Source\AssignmentB3.c">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\asf.h">

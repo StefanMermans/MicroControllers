@@ -10,13 +10,7 @@
 #include <avr/interrupt.h>
 
 
-void wait( int ms )
-{
-	for (int i=0; i<ms; i++)
-	{
-		_delay_ms( 1 );		// library function (max 30 ms at 8MHz)
-	}
-}
+
 
 void run()
 {
