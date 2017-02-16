@@ -4,9 +4,9 @@
 
 int main (void)
 {
-	/* Insert system clock initialization code here (sysclk_init()). */
-
 	board_init();
 
 	LCD_init();
+	
+	LCD_display_text("Hallo Diederich doei diederich");
 }

@@ -19,6 +19,5 @@ void LCD_writeline2(char * text);
 
 void LCD_command(unsigned char data);
 void LCD_display_text(char *str);
-void LCD_set_cursor();
 
 #endif /* LCD_H_ */

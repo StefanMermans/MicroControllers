@@ -9,6 +9,7 @@
 #include "asf.h"
 #include "../Headers/LCD.h"
 #include <util/delay.h>
+#include <string.h>
 
 void LCD_init()
 {
@@ -79,12 +80,35 @@ void LCD_command(unsigned char data)
 	PORTC = 0x00;				// stop
 }
 
-void LCD_display_text(char *str)
+void LCD_display_text(char * str)
 {
-
-}
-
-void LCD_set_cursor()
-{
-
+	LCD_command(0x80); // Set cursor to line 1
+	
+	int endreached = 0;
+	
+	for(int i = 0; i < 16; i++){
+		if(!endreached && str[i] == '\0'){
+			endreached = 1;
+		}
+		
+		if(endreached){
+			LCD_writeChar(' ');
+		} else{
+			LCD_writeChar(str[i]);
+		}
+	}
+	
+	LCD_command(0xC0); // Set cursor to line 2
+	
+	for(int i = 0; i < 16; i++){
+		if(!endreached && str[i+16] == '\0'){
+			endreached = 1;
+		}
+		
+		if(endreached){
+			LCD_writeChar(' ');
+			} else{
+			LCD_writeChar(str[i+16]);
+		};
+	}
 }
