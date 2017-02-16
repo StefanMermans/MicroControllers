@@ -190,8 +190,16 @@
     <Folder Include="src\ASF\mega\utils\assembler\" />
     <Folder Include="src\ASF\mega\utils\preprocessor\" />
     <Folder Include="src\config\" />
+    <Folder Include="src\Headers\" />
+    <Folder Include="src\Source" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Headers\LCD.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Source\LCD.c">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="src\asf.h">
       <SubType>compile</SubType>
     </None>
