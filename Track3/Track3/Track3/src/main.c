@@ -1,6 +1,7 @@
 #include <asf.h>
 
 #include "Headers/LCD.h"
+#include "Headers/Counter.h"
 
 int main (void)
 {
@@ -8,5 +9,6 @@ int main (void)
 
 	LCD_init();
 	
-	LCD_display_text("Hallo Diederich doei diederich");
+	counter_init();
+	//LCD_display_text("Hallo Diederich doei diederich");
 }
