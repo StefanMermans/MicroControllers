@@ -7,15 +7,30 @@
 #include "../asf.h"
 #include "../Headers/Counter.h"
 
-ISR(TIMER2_COMP_vect){
-	PORTB = 0xFF;
+#define MAX_OVERFLOW 2
+#define REMAINDER_TIMER 31250
+
+volatile int overflow_count = 0;
+
+ISR ( TIMER1_OVF_vect )
+{
+	TCNT1 = REMAINDER_TIMER; // Reload timer with precalculated value
+
+	overflow_count += 1;
+	if(overflow_count >= MAX_OVERFLOW){
+		overflow_count = 0;
+		PORTB ^= (1 << 0) ; // Toggle the LED
+	}	
 }
 
 void counter_init()
 {
-	DDRD = 0x00;			// set PORTD to input
-	TCCR2 = 0b00000111;		// Counting via PD7, rising edge
+	DDRB |= (1 << 0) ; // Set LED as output
 	
-	DDRB = 0xFF;			// set PORTB to output
-	PORTB = TCNT2;			// show value TCCR2
+	TIMSK |= (1 << TOIE1 ); // Enable overflow interrupt
+	sei () ; // Enable global interrupts
+	
+	TCNT1 = REMAINDER_TIMER; // Preload timer with precalculated value
+	
+	TCCR1B |= ((1 << CS10 ) | (1 << CS11 )) ; // Set up timer at Fcpu /64
 }

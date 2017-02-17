@@ -9,6 +9,9 @@ int main (void)
 
 	LCD_init();
 	
+	
 	counter_init();
-	//LCD_display_text("Hallo Diederich doei diederich");
+	LCD_display_text("Hallo Diederich doei diederich");
+	
+	while(1) continue;
 }
