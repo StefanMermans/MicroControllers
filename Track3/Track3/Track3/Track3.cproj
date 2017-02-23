@@ -200,10 +200,16 @@
     <Compile Include="src\Headers\LCD.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\Headers\Timer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\Source\Counter.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Source\LCD.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Source\Timer.c">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\asf.h">
