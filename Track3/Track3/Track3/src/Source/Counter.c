@@ -14,15 +14,17 @@ void counter_init()
 {
 	DDRD = 0xFF;
 	PORTD = 0x00;
+	
 	TCCR2 = 0x07;
+	
 	DDRD = 0x00;
 	
+	TCNT2 = 0x00;
+	TIMSK = 0x01;
 	
 	DDRB = 0xFF;
-	TCNT2 = 0x00;
-	OCR2=0x01;
-	TIMSK = 0x01;
 	PORTB =0x00;
+	
 	while(1)
 	{
 		PORTB = TCNT2;
