@@ -11,6 +11,45 @@
 #include "../headers/dotMatrix.h"
 #include "../headers/wait.h"
 
+//shows the matrix on the matrixboard 
+void dotMatrix_displayMatrix(int matrix[8][8])
+{
+	int x = 0;
+	int y = 0;
+	for(x=0; x<8; x++)
+	{
+		int row = 0;
+		row |= matrix[x][0];
+		for(y=7; y>0; y--)			//starts at 7 because the point x=0 has to be on the left of the binary number and it is mirrored
+		{
+			row = row<<1;
+			row |= matrix[x][y];			
+		}
+		dotMatrix_writeColumn(x,row);
+	}
+	
+}
+
+void dotMatrix_writeColumn(int column, int row)
+{
+	dotMatrix_start();
+	
+	dotMatrix_tx(0xE0);
+	dotMatrix_tx(column*2);
+	dotMatrix_tx(row);
+	
+	dotMatrix_stop();
+}
+
+void dotMatrix_clearScreen()
+{
+	int i = 0;
+	for(i =0; i<8;i++)
+	{
+		dotMatrix_writeColumn(i,0);
+	}	
+}
+
 void dotMatrix_start()
 {
 	TWCR = (0x80 | 0x20 | 0x04);

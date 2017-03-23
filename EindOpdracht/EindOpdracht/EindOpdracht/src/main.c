@@ -5,14 +5,18 @@
 #include "../headers/wait.h"
 #include "../headers/dotMatrix.h"
 
-void testDotMatrix(void);
-
 int main (void)
 {
-	/* Insert system clock initialization code here (sysclk_init()). */
-
 	board_init();
 
+	dotMatrix_clearScreen();
 	dotMatrix_init();
-	/* Insert application code here, after the board has been initialized. */
+
+	snake_init();
+
+	while(1){
+		snake_step();
+
+		wait(500);
+	}
 }
