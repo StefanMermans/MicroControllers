@@ -197,10 +197,16 @@
     <Compile Include="src\headers\dotMatrix.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\headers\snake.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\headers\wait.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\source\dotMatrix.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\source\snake.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\source\wait.c">
