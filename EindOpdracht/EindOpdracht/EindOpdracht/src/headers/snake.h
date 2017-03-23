@@ -38,7 +38,9 @@ typedef struct{
 // Function prototypes
 void snake_init(void);
 void snake_step(void);
+void snake_draw(void);
 
+void snake_clearDisplay(void);
 void snake_createFood(void);
 void snake_move(int direction[2]);
 void snake_addSegment(void);

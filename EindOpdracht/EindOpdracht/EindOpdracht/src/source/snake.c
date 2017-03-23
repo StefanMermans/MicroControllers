@@ -9,6 +9,7 @@
 
 // Internal project includes
 #include "../headers/snake.h"
+#include "../headers/dotMatrix.h"
 
 
 int display[GRID_SIZE][GRID_SIZE];
@@ -16,13 +17,6 @@ int foodLocation[2];
 Snake snake;
 
 void snake_init(){
-    // Initialse the display array with zeros
-    for(int i = 0; i < GRID_SIZE; i++){
-        for(int ii = 0; ii < GRID_SIZE; ii++){
-            display[i][ii] = 0;
-        }
-    }
-
     // Create the snake
     // create the first segment of the snake
     Segment segment;
@@ -56,6 +50,15 @@ void snake_move(int direction[2]){
     snake.segments[0].position[1] += direction[1];
 }
 
+void snake_clearDisplay(){
+    // Initialse the display array with zeros
+    for(int i = 0; i < GRID_SIZE; i++){
+        for(int ii = 0; ii < GRID_SIZE; ii++){
+            display[i][ii] = 0;
+        }
+    }
+}
+
 void snake_createFood(){
     int possibleLocations[SEGMENT_MAX][2];
     int locationCount = 0;
@@ -82,6 +85,17 @@ void snake_createFood(){
 
     foodLocation[0] = possibleLocations[location][0];
     foodLocation[1] = possibleLocations[location][1];
+}
+
+void snake_draw(){
+    snake_clearDisplay();
+
+    for(int i = 0; i < snake.nSegments; i++){
+        display[snake.segments[i].position[0]][snake.segments[i].position[1]] = 1;
+    }
+    display[foodLocation[0]][foodLocation[1]] = 1;
+
+    dotMatrix_displayMatrix(display);
 }
 
 void snake_step(){
@@ -112,6 +126,6 @@ void snake_step(){
     if(snake.segments[0].position[0] == foodLocation[0] &&
        snake.segments[1].position[1] == foodLocation[1]){
         snake_addSegment();
-        snake_createFood();   
+        snake_createFood();
     }
 }

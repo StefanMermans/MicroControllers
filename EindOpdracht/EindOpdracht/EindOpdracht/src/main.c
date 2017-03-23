@@ -4,6 +4,7 @@
 // internal project includes
 #include "../headers/wait.h"
 #include "../headers/dotMatrix.h"
+#include "../headers/snake.h"
 
 int main (void)
 {
@@ -16,7 +17,8 @@ int main (void)
 
 	while(1){
 		snake_step();
+		snake_draw();
 
-		wait(500);
+		wait(1000);
 	}
 }
