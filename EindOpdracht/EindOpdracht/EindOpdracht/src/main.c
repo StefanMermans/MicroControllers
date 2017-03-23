@@ -19,23 +19,35 @@ int main (void)
 	/* Insert application code here, after the board has been initialized. */
 }
 
-void testDotMatrix(){
+void testDotMatrix()
+{
+	int i =0;
+	int x = 1;
 	while(1)
 	{
-		dotMatrix_start();
-		dotMatrix_tx(0xE0);	// Display I2C addres + R/W bit
-		dotMatrix_tx(0x0E);	// Address
-		dotMatrix_tx(0xFF);	// data
-		dotMatrix_stop();
+				dotMatrix_start();
+				dotMatrix_tx(0xE0);	// Display I2C addres + R/W bit
+				dotMatrix_tx(0x00+i);	// Address
+				dotMatrix_tx(x);	// data
+				dotMatrix_stop();
 
-		wait(500);
+				wait(100);
 
-		dotMatrix_start();
-		dotMatrix_tx(0xE0);	// Display I2C addres + R/W bit
-		dotMatrix_tx(0x0E);	// Address
-		dotMatrix_tx(0x00);	// data
-		dotMatrix_stop();
-
-		wait(500);
+				dotMatrix_start();
+				dotMatrix_tx(0xE0);	// Display I2C addres + R/W bit
+				dotMatrix_tx(0x0+i);	// Address
+				dotMatrix_tx(x);	// data
+				dotMatrix_stop();
+				
+				wait(100);
+				
+				x*=2;
+				if(x==16)
+				{
+					i+=2;
+					if(i==16)
+					i=0;
+					x=1;
+				}
 	}
 }
