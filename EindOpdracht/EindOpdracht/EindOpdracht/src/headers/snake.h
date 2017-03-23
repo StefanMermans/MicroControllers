@@ -33,12 +33,13 @@ typedef struct{
     int direction;
 } Snake;
 
-
-
 // Function prototypes
 void snake_init(void);
 void snake_step(void);
 void snake_draw(void);
+// Set the new direction of the snake based on input
+// use -1 for left, and 1 for right
+void snake_setDirection(int direction);
 
 void snake_clearDisplay(void);
 void snake_createFood(void);

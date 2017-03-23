@@ -10,14 +10,14 @@ int main (void)
 {
 	board_init();
 
-	dotMatrix_clearScreen();
 	dotMatrix_init();
+	dotMatrix_clearScreen();
 
 	snake_init();
 
 	while(1){
-		snake_step();
 		snake_draw();
+		snake_step();
 
 		wait(1000);
 	}

@@ -21,8 +21,8 @@ void snake_init(){
     // create the first segment of the snake
     Segment segment;
     segment.isHead = 1;
-    segment.position[0] = 4;
-    segment.position[1] = 4;
+    segment.position[0] = 0;
+    segment.position[1] = 0;
 
     // Add the first segment to the snake.
     snake.segments[0] = segment;
@@ -30,6 +30,16 @@ void snake_init(){
     snake.direction = DIRECTION_UP;
 
     snake_createFood();
+}
+
+void snake_setDirection(int direction){
+    snake.direction += direction;
+
+    if(snake.direction > DIRECTION_DOWN){
+        snake.direction = DIRECTION_LEFT;
+    } else if(snake.direction < DIRECTION_LEFT){
+        snake.direction = DIRECTION_DOWN;
+    }
 }
 
 void snake_addSegment(){
@@ -48,6 +58,18 @@ void snake_move(int direction[2]){
 
     snake.segments[0].position[0] += direction[0];
     snake.segments[0].position[1] += direction[1];
+
+    if(snake.segments[0].position[0] >= GRID_SIZE){
+        snake.segments[0].position[0] = 0;
+    } else if (snake.segments[0].position[0] < 0){
+        snake.segments[0].position[0] = GRID_SIZE - 1;
+    }
+
+    if(snake.segments[0].position[1] >= GRID_SIZE){
+        snake.segments[0].position[1] = 0;
+    } else if(snake.segments[0].position[1] < 0){
+        snake.segments[0].position[1] = GRID_SIZE - 1;
+    }
 }
 
 void snake_clearDisplay(){
@@ -124,7 +146,7 @@ void snake_step(){
     }
 
     if(snake.segments[0].position[0] == foodLocation[0] &&
-       snake.segments[1].position[1] == foodLocation[1]){
+       snake.segments[0].position[1] == foodLocation[1]){
         snake_addSegment();
         snake_createFood();
     }
