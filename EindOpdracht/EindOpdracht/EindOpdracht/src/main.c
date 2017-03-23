@@ -21,33 +21,26 @@ int main (void)
 
 void testDotMatrix()
 {
-	int i =0;
-	int x = 1;
-	while(1)
+	dotMatrix_clearScreen();
+	int y=0;
+	int x=0;
+	int matrix[8][8];
+	int toggle = 0;
+
+	for(x = 0; x<8; x++)
 	{
-				dotMatrix_start();
-				dotMatrix_tx(0xE0);	// Display I2C addres + R/W bit
-				dotMatrix_tx(0x00+i);	// Address
-				dotMatrix_tx(x);	// data
-				dotMatrix_stop();
-
-				wait(100);
-
-				dotMatrix_start();
-				dotMatrix_tx(0xE0);	// Display I2C addres + R/W bit
-				dotMatrix_tx(0x0+i);	// Address
-				dotMatrix_tx(x);	// data
-				dotMatrix_stop();
-				
-				wait(100);
-				
-				x*=2;
-				if(x==16)
-				{
-					i+=2;
-					if(i==16)
-					i=0;
-					x=1;
-				}
+		//toggle= !toggle;
+		for(y=0; y<8; y++)
+		{
+			//toggle= !toggle;
+			if(x==y)
+				toggle = 1;
+			else
+				toggle = 0;
+			matrix[x][y] = 0;
+		}
 	}
+
+	dotMatrix_displayMatrix(matrix);
+	
 }
