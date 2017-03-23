@@ -13,7 +13,7 @@ int main (void)
 
 	board_init();
 
-
+	dotMatrix_init();
 
 	testDotMatrix();
 	/* Insert application code here, after the board has been initialized. */
