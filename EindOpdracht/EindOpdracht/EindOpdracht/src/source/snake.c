@@ -10,29 +10,51 @@
 // Internal project includes
 #include "../headers/snake.h"
 #include "../headers/dotMatrix.h"
-
+#include "../headers/LCD.h"
+#include <stdio.h>
 
 int display[GRID_SIZE][GRID_SIZE];
 int foodLocation[2];
+int highScore = 0;
+int score;
 Snake snake;
 
+int snake_highScore(){
+    return highScore;
+}
+
+int snake_score(){
+    return score;
+}
+
+void snake_writeScore(){
+    char scoreText[17];
+    sprintf(scoreText, "Score: %i        ", score);
+    LCD_writeLine1(scoreText);
+}
+
 void snake_init(){
+    score = 0;
+    snake_writeScore();
+
     // Create the snake
     // create the first segment of the snake
     Segment segment;
     segment.isHead = 1;
-    segment.position[VECT_X] = 0;
-    segment.position[VECT_Y] = 0;
+    segment.position[VECT_X] = 4;
+    segment.position[VECT_Y] = 4;
 
     // Add the first segment to the snake.
     snake.segments[0] = segment;
     snake.nSegments = 1;
     snake.direction = DIRECTION_UP;
 
-    snake_addSegment();
-    snake_addSegment();
+    snake_addSegmentAtPoint(4,3);
+    snake_addSegmentAtPoint(4,2);
 
-    snake_createFood();
+    // snake_createFood();
+    foodLocation[VECT_X] = 0;
+    foodLocation[VECT_Y] = 4;
 }
 
 void snake_setDirection(int direction){
@@ -46,8 +68,24 @@ void snake_setDirection(int direction){
 }
 
 void snake_addSegment(){
+    score += 1;
+
+    snake_writeScore();
+
     Segment segment;
     segment.isHead = 0;
+    segment.position[VECT_X] = snake.segments[snake.nSegments-1].position[VECT_X];
+    segment.position[VECT_Y] = snake.segments[snake.nSegments-1].position[VECT_Y];
+
+    snake.segments[snake.nSegments] = segment;
+    snake.nSegments += 1;
+}
+
+void snake_addSegmentAtPoint(int x, int y){
+    Segment segment;
+    segment.isHead = 0;
+    segment.position[VECT_X] = x;
+    segment.position[VECT_Y] = y;
 
     snake.segments[snake.nSegments] = segment;
     snake.nSegments += 1;
@@ -61,6 +99,8 @@ void snake_move(int direction[2]){
 
     snake.segments[0].position[VECT_X] += direction[VECT_X];
     snake.segments[0].position[VECT_Y] += direction[VECT_Y];
+
+
 
     if(snake.segments[0].position[VECT_X] >= GRID_SIZE){
         snake.segments[0].position[VECT_X] = 0;
@@ -126,31 +166,44 @@ void snake_draw(){
 void snake_step(){
     int direction[2] = {0,0};
 
-    for(int i = 0; i < snake.nSegments; i++){
-
-        switch (snake.direction) {
-            case DIRECTION_UP:
-                direction[VECT_Y] = 1;
-                break;
-            case DIRECTION_DOWN:
-                direction[VECT_Y] = -1;
-                break;
-            case DIRECTION_LEFT:
-                direction[VECT_X] = -1;
-                break;
-            case DIRECTION_RIGHT:
-                direction[VECT_X] = 1;
-                break;
-            default:
-                break;
-        }
-
-        snake_move(direction);
+    switch (snake.direction) {
+        case DIRECTION_UP:
+            direction[VECT_Y] = 1;
+            break;
+        case DIRECTION_DOWN:
+            direction[VECT_Y] = -1;
+            break;
+        case DIRECTION_LEFT:
+            direction[VECT_X] = -1;
+            break;
+        case DIRECTION_RIGHT:
+            direction[VECT_X] = 1;
+            break;
+        default:
+            break;
     }
+
+    snake_move(direction);
 
     if(snake.segments[0].position[VECT_X] == foodLocation[0] &&
        snake.segments[0].position[VECT_Y] == foodLocation[1]){
+
         snake_addSegment();
         snake_createFood();
+        return;
+    }
+
+    for (int i = 1; i < snake.nSegments; i++){
+        if(snake.segments[0].position[VECT_X] == snake.segments[i].position[VECT_X]&&
+        snake.segments[0].position[VECT_Y] == snake.segments[i].position[VECT_Y]){
+            if(score > highScore){
+                highScore = score;
+
+                char scoreText[17];
+                sprintf(scoreText,"HighScore: %i     ",highScore);
+                LCD_writeline2(scoreText);
+            }
+            snake_init();
+        }
     }
 }
