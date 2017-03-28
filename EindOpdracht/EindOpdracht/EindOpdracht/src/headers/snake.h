@@ -11,10 +11,14 @@
 #define GRID_SIZE 8
 
 // The direction in which the snake will move.
-#define DIRECTION_LEFT 0
-#define DIRECTION_UP 1
-#define DIRECTION_RIGHT 2
-#define DIRECTION_DOWN 3
+#define DIRECTION_LEFT -1
+#define DIRECTION_UP 0
+#define DIRECTION_RIGHT 1
+#define DIRECTION_DOWN 4
+
+// Use for the x and y variables in a grid
+#define VECT_X 0
+#define VECT_Y 1
 
 // The maximum number of segments
 // This is determined by the amount of dots on the display 8 * 8 = 64
@@ -38,7 +42,7 @@ void snake_init(void);
 void snake_step(void);
 void snake_draw(void);
 // Set the new direction of the snake based on input
-// use -1 for left, and 1 for right
+// use DIRECTION_LEFT for left, and DIRECTION_RIGHT for right
 void snake_setDirection(int direction);
 
 void snake_clearDisplay(void);
