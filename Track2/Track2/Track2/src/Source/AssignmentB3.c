@@ -3,17 +3,22 @@
  *
  * Created: 9-2-2017 13:08:02
  *  Author: Camiel
- */ 
+ */
 #include "../Headers/AssignmentB3.h"
 /*
 		0
-	5		1	
+	5		1
 		6
 	4		2
 		3
 */
 
+#define ANIMATION_LENGTH 6
 
+typedef struct{
+	int value;
+	int delay
+} animatonFrame;
 
 void display(int number){
 	int hexTable[20]={
@@ -27,7 +32,7 @@ void display(int number){
 		0x07, // 7
 		0x7F, // 8
 		0x6F, // 9
-		
+
 		0x77, // A
 		0x7c, // b
 		0x39, // C
@@ -39,18 +44,31 @@ void display(int number){
 	if(number < 0 || number > 15){
 		number = 16;
 	}
-	PORTC = hexTable[number];	
+	PORTC = hexTable[number];
+}
+
+void displayAnimation(int index){
+	animatonFrame hexTable[ANIMATION_LENGTH] = {
+		{0x01, 250},
+		{0x02, 250},
+		{0x03, 250},
+		{0x04, 250},
+		{0x05, 250},
+		{0x00, 250}
+	};
+	PORTC = hexTable[index];
+	wait(hexTable[index])
 }
 
 void runB3 ()
-{	
+{
 	DDRD = 0x00;
 	DDRC = 0xFF;
-	PORTC = 0x00;	
+	PORTC = 0x00;
 	PORTD = 0x01;
-	int number =0;	
+	int number =0;
 	while(1)
-	{		
+	{
 		for(int i =0; i<17; i++)
 		{
 			display(i);
@@ -64,6 +82,15 @@ void runB3 ()
 				wait(300);
 			}
 		}
-		
+
+	}
+}
+
+void runB4()
+{
+	int index = 0;
+
+	while(index < ANIMATION_LENGTH){
+		displayAnimation(index);
 	}
 }

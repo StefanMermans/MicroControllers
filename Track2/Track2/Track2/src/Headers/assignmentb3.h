@@ -3,7 +3,7 @@
  *
  * Created: 9-2-2017 13:21:56
  *  Author: Camiel
- */ 
+ */
 
 
 #ifndef ASSIGNMENTB3_H_
@@ -18,6 +18,7 @@
 // Declarations
 void display(int number);
 void runB3();
+void runB4();
 
 
 #endif /* ASSIGNMENTB3_H_ */
